@@ -2,7 +2,6 @@ on:
     push:
         branches:
             - main
-    workflow_dispatch:
 
 permissions:
     contents: write
@@ -14,6 +13,8 @@ name: release-please
 jobs:
   release-please:
     runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
     steps:
       - uses: googleapis/release-please-action@v4
         name: Release-Please
@@ -26,6 +27,59 @@ jobs:
           # this is a built-in strategy in release-please, see "Action Inputs"
           # for more options
           release-type: simple
-      - uses: ./.github/workflows/release_cloudcalculus.yml
-        name: Deploy Release
-        if: ${{ steps.release.outputs.release_created }}
+  
+  build:
+    runs-on: windows-latest
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up .NET Core
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.x'
+
+      - name: Build with dotnet
+        run: dotnet build app/CloudCalculusCalculator/CloudCalculusCalculator.sln --configuration Release
+
+      - name: dotnet publish
+        run: dotnet publish app/CloudCalculusCalculator/CloudCalculusCalculator.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: .net-app
+          path: ${{env.DOTNET_ROOT}}/myapp
+
+  deploy:
+    runs-on: windows-latest
+    needs: [release-please, build]
+    if: ${{ needs.release-please.outputs.release_created }}
+    permissions:
+      id-token: write #This is required for requesting the JWT
+      contents: read #This is required for actions/checkout
+
+    steps:
+      - name: Download artifact from build job
+        uses: actions/download-artifact@v4
+        with:
+          name: .net-app
+      
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_2AFB45F28C2E47AA80DE90FFF0F56E60 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0870AB6EDFC94FC890B06D972F1C168E }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_79FD5F637105435C885E8EDBB7893147 }}
+
+      - name: Deploy to Azure Web App
+        id: deploy-to-webapp
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'cloudcalculus'
+          slot-name: 'Production'
+          package: .
