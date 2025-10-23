@@ -12,8 +12,8 @@ namespace CloudCalculusCalculator.Math
             {
                 throw new Exception("No relation defined for equation with total terms not equal to 2.");
             }
-            lhs = Parse(arr[1]);
-            rhs = Parse(arr[2]);
+            lhs = MathUtils.Parse(arr[1]);
+            rhs = MathUtils.Parse(arr[2]);
         }
         public override string GetDisplaySolution() => GetDisplaySolutionForVariable(lhs, rhs, SymbolicExpression.Variable("x"));
     }
