@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.7](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.6...v1.0.7) (2025-10-23)
+
+
+### Miscellaneous Chores
+
+* release 1.0.7 ([#33](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/issues/33)) ([702af37](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/commit/702af37a6e7a0590baf7c6c705ef2bcc404ae23a))
+
 ## [1.0.6](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.5...v1.0.6) (2025-10-23)
 
 
