@@ -1,6 +1,7 @@
-using System.Diagnostics;
+using CloudCalculusCalculator.Math;
 using CloudCalculusCalculator.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace CloudCalculusCalculator.Controllers
 {
@@ -13,9 +14,42 @@ namespace CloudCalculusCalculator.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public IActionResult Index() //On load
         {
-            return View();
+            return View(new EquationViewModel()); //Start with a new EquationViewModel object
+        }
+        [HttpPost]
+        public IActionResult Index(EquationViewModel model)
+        {
+            string input;
+            if (model.Equation == null)
+            {
+                FormatForError(model, "No equation was recieved.");
+                return View(model);
+            }
+            else
+            {
+                input = model.Equation;
+            }
+
+            try
+            {
+                Console.WriteLine(input); //For debugging
+                ParsedMath math = MathUtils.FromJSON(input);
+                model.Result = math.GetDisplaySolution();
+            }
+            catch (Exception ex)
+            {
+                FormatForError(model, $"Invalid equation \"{input}\".\nError: \"{ex.Message}\"");
+                return View(model);
+            }
+
+            return View(model);
+        }
+        private static void FormatForError(EquationViewModel model, string message = "Error while evaluating equation.")
+        {
+            model.Result = message;
         }
 
         public IActionResult Privacy()
