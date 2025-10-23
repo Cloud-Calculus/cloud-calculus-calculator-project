@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.4...v1.0.5) (2025-10-23)
+
+
+### Continuous Integration
+
+* enable auto merge for release-please PRs ([#27](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/issues/27)) ([08a01c6](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/commit/08a01c697320abe0e745581230def6b38ce382fe))
+
 ## [1.0.4](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.3...v1.0.4) (2025-10-23)
 
 
