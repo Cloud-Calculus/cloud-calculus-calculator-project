@@ -8,7 +8,8 @@ env:
     GH_TOKEN: ${{ github.token }}
 
 jobs:
-  commit-check:
+  branch-check:
+    if: github.head_ref != 'release-please--branches--main' 
     runs-on: ubuntu-latest
     permissions:
       contents: read
