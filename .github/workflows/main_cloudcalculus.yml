@@ -1,37 +1,17 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy ASP.Net Core app to Azure Web App - cloudcalculus
+
 on:
-    push:
-        branches:
-            - main
-
-permissions:
-    contents: write
-    issues: write
-    pull-requests: write
-
-name: release-please
+  push:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
-  release-please:
-    runs-on: ubuntu-latest
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-    steps:
-      - uses: googleapis/release-please-action@v4
-        name: Release-Please
-        id: release
-        with:
-          # this assumes that you have created a personal access token
-          # (PAT) and configured it as a GitHub action secret named
-          # `MY_RELEASE_PLEASE_TOKEN` (this secret name is not important).
-          token: ${{ secrets.CLOUD_CALCULUS_RELEASE_PLEASE_TOKEN }}
-          # this is a built-in strategy in release-please, see "Action Inputs"
-          # for more options
-          release-type: simple
-  
   build:
     runs-on: windows-latest
-    needs: release-please
-    if: ${{ needs.release-please.outputs.release_created }}
     permissions:
       contents: read #This is required for actions/checkout
 
@@ -44,10 +24,10 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Build with dotnet
-        run: dotnet build app/CloudCalculusCalculator/CloudCalculusCalculator.sln --configuration Release
+        run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish app/CloudCalculusCalculator/CloudCalculusCalculator.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -57,8 +37,7 @@ jobs:
 
   deploy:
     runs-on: windows-latest
-    needs: [release-please, build]
-    if: ${{ needs.release-please.outputs.release_created }}
+    needs: build
     permissions:
       id-token: write #This is required for requesting the JWT
       contents: read #This is required for actions/checkout
@@ -72,9 +51,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_2AFB45F28C2E47AA80DE90FFF0F56E60 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_0870AB6EDFC94FC890B06D972F1C168E }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_79FD5F637105435C885E8EDBB7893147 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_B50CD41CA3D443E3A3B72219356E1788 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_9BA39EAC8DAC455295FBEFA340D4FF5B }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_1D9C215F62764163BB6B034D185CF2AA }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -83,3 +62,4 @@ jobs:
           app-name: 'cloudcalculus'
           slot-name: 'Production'
           package: .
+          
