@@ -22,4 +22,11 @@ public class AdditionTests
         string testJSON = "[\"Equal\", \"x\", [\"Add\", -1, 1]]";
         Assert.That(ParsedMathFactory.Create(testJSON).GetDisplaySolution() == "0");
     }
+
+    [Test]
+    public void Is1PlusHalfEqualTo1Point5()
+    {
+        string testJSON = "[\"Equal\", \"x\", [\"Add\", 1, 0.5]]";
+        Assert.That(ParsedMathFactory.Create(testJSON).GetDisplaySolution() == "1.5");
+    }
 }
