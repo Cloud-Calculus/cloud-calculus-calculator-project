@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CloudCalculusCalculator.Tests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7cb8fddc1c11be021a5a88dd0179bdea5c114c46")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+104f28779d4e6eb1efdf0875545fd100753b24db")]
 [assembly: System.Reflection.AssemblyProductAttribute("CloudCalculusCalculator.Tests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CloudCalculusCalculator.Tests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
