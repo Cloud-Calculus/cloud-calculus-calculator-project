@@ -1,7 +1,7 @@
-using System.Diagnostics;
+using CloudCalculusCalculator.Math;
 using CloudCalculusCalculator.Models;
 using Microsoft.AspNetCore.Mvc;
-using MathNet.Symbolics;
+using System.Diagnostics;
 
 namespace CloudCalculusCalculator.Controllers
 {
@@ -36,7 +36,7 @@ namespace CloudCalculusCalculator.Controllers
             try
             {
                 Console.WriteLine(input); //For debugging
-                MathUtils.ParsedMath math = MathUtils.FromJSON(input);
+                ParsedMath math = MathUtils.FromJSON(input);
                 model.Result = math.GetDisplaySolution();
             }
             catch (Exception ex)
