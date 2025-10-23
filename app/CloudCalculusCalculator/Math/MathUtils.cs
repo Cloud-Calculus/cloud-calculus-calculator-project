@@ -6,21 +6,6 @@ namespace CloudCalculusCalculator.Math
 {
     public static class MathUtils
     {
-        public static ParsedMath ParsedMathFactory(string mathJSON)
-        {
-            JToken root = JToken.Parse(mathJSON);
-
-            if (root is not JArray arr)
-            {
-                throw new FormatException("Input was not an array like expected.");
-            }
-
-            return arr[0].Value<string>() switch
-            {
-                "Equal" => new ParsedEquality(arr),
-                _ => new ParsedExpression(arr)
-            };
-        }
         public static SymbolicExpression Parse(JToken node)
         {
             return node.Type switch

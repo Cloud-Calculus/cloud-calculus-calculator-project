@@ -36,7 +36,7 @@ namespace CloudCalculusCalculator.Controllers
             try
             {
                 Console.WriteLine(input); //For debugging
-                ParsedMath math = MathUtils.ParsedMathFactory(input);
+                ParsedMath math = ParsedMathFactory.Create(input);
                 model.Result = math.GetDisplaySolution();
             }
             catch (Exception ex)
