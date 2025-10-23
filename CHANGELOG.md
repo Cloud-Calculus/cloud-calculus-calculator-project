@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.1...v1.0.2) (2025-10-23)
+
+
+### Continuous Integration
+
+* move deployment code to release-please workflow ([#20](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/issues/20)) ([fa4f326](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/commit/fa4f326205039751a1a2d0a6a84d567fe5a96c08))
+
 ## [1.0.1](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.0...v1.0.1) (2025-10-23)
 
 
