@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.8](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.7...v1.0.8) (2025-10-23)
+
+
+### Tests
+
+* implemented final tests ([#38](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/issues/38)) ([d662d7a](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/commit/d662d7a02daa84a03058f4bc589dd688a5013ece))
+
 ## [1.0.7](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.6...v1.0.7) (2025-10-23)
 
 
