@@ -16,6 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: googleapis/release-please-action@v4
+        name: Release-Please
+        id: release
         with:
           # this assumes that you have created a personal access token
           # (PAT) and configured it as a GitHub action secret named
@@ -24,4 +26,6 @@ jobs:
           # this is a built-in strategy in release-please, see "Action Inputs"
           # for more options
           release-type: simple
-          target-branch: release
+      - uses: Cloud-Calculus/cloud-calculus-calculator-project/.github/workflows/release_cloudcalculus.yml
+        name: Deploy Release
+        if: ${{ steps.release.outputs.release_created }}

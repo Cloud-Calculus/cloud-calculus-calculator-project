@@ -4,10 +4,7 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - cloudcalculus
 
 on:
-  push:
-    branches:
-      - release
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   build:
