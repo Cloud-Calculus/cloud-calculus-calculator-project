@@ -8,4 +8,4 @@ Branches and commits are named according to the [Conventional Commit](https://ww
 Scope is optional, but preferred. All commits and branches should be in lowercase as often as possible.
 
 # Deployment
-When commits are pushed to the release branch, deployment is done automatically to the Azure server.
+When the release PR created by release-please is merged into main (and thus creates a release on the repository), an Azure deployment to production is automatically performed.
