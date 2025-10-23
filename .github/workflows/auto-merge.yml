@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     # Automerge all autorelease PRs, except those containing breaking changes
-    if: |
+    if: >
       ${{contains(github.event.pull_request.labels.*.name, 'autorelease: pending') && !contains(github.event.pull_request.labels.*.name, 'breaking change')}}
     steps:
     - uses: alexwilson/enable-github-automerge-action@main
@@ -23,9 +23,16 @@ jobs:
     needs: enable-auto-merge
     permissions:
       pull-requests: write
-    if: |
+    if: >
       ${{contains(github.event.pull_request.labels.*.name, 'autorelease: pending') && !contains(github.event.pull_request.labels.*.name, 'breaking change')}}
     steps:
+      - name: Wait for CI checks to complete
+        uses: lewagon/wait-on-check-action@v1.3.4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 30
+          running-workflow-name: 'auto-approve-releases'
       - id: auto-approve
         uses: hmarr/auto-approve-action@v4
         with:
