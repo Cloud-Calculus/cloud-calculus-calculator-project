@@ -8,7 +8,7 @@ namespace CloudCalculusCalculator.Math
         private SymbolicExpression expression;
         public ParsedExpression(JArray arr)
         {
-            expression = Parse(arr);
+            expression = MathUtils.Parse(arr);
         }
         public override string GetDisplaySolution() => GetDisplaySolutionForVariable(expression, SymbolicExpression.Zero, SymbolicExpression.Variable("x"));
     }
