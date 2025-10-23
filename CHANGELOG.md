@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.2...v1.0.3) (2025-10-23)
+
+
+### Continuous Integration
+
+* rename release-please workflow to connect with azure ([#22](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/issues/22)) ([2f18128](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/commit/2f18128a04f8970dbd666f3bc1a4e49b96ae85da))
+
 ## [1.0.2](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.1...v1.0.2) (2025-10-23)
 
 
