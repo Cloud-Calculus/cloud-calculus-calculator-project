@@ -1,0 +1,32 @@
+name: Auto-Merge
+on:
+  pull_request_target:
+    types: [labeled]
+
+jobs:
+  enable-auto-merge:
+    name: Enable auto-merge for Release-Please PRs
+    runs-on: ubuntu-latest
+
+    # Automerge all autorelease PRs, except those containing breaking changes
+    if: |
+      ${{contains(github.event.pull_request.labels.*.name, 'autorelease: pending') && !contains(github.event.pull_request.labels.*.name, 'breaking change')}}
+    steps:
+    - uses: alexwilson/enable-github-automerge-action@main
+      with:
+        github-token: "${{ secrets.GITHUB_TOKEN }}"
+        merge-method: "SQUASH"
+
+  auto-approve-releases:
+    name: Approve Release-Please PRs
+    runs-on: ubuntu-latest
+    needs: enable-auto-merge
+    permissions:
+      pull-requests: write
+    if: |
+      ${{contains(github.event.pull_request.labels.*.name, 'autorelease: pending') && !contains(github.event.pull_request.labels.*.name, 'breaking change')}}
+    steps:
+      - id: auto-approve
+        uses: hmarr/auto-approve-action@v4
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
