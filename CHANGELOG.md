@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.8...v1.1.0) (2025-10-24)
+
+
+### Features
+
+* new X is text ([#42](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/issues/42)) ([e66d141](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/commit/e66d14186c6d8c517760f909216149fb4fb2c4e3))
+
 ## [1.0.8](https://github.com/Cloud-Calculus/cloud-calculus-calculator-project/compare/v1.0.7...v1.0.8) (2025-10-23)
 
 
